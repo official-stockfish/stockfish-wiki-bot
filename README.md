@@ -1,0 +1,2 @@
+# stockfish-wiki-bot
+ 
