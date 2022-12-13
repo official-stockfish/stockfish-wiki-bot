@@ -3,11 +3,11 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('wiki')
-		.setDescription('Replies with your input!')
+		.setDescription('Retrieve wiki articles')
 		.addStringOption(option =>
 			option
 				.setName('query')
-				.setDescription('Wiki page')
+				.setDescription('name')
 				.addChoices(
 					{ name: 'Home', value: 'https://github.com/official-stockfish/Stockfish/wiki' },
 					{ name: 'Commands', value: 'https://github.com/official-stockfish/Stockfish/wiki/Commands' },
