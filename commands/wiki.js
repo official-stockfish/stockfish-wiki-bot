@@ -9,8 +9,8 @@ module.exports = {
 				.setName('query')
 				.setDescription('name')
 				.addChoices(
-					{ name: 'Home', value: 'https://github.com/official-stockfish/Stockfish/wiki' },
-					{ name: 'Commands', value: 'https://github.com/official-stockfish/Stockfish/wiki/Commands' },
+					{ name: 'Home', value: '<https://github.com/official-stockfish/Stockfish/wiki>' },
+					{ name: 'Commands', value: '<https://github.com/official-stockfish/Stockfish/wiki/Commands>' },
 				)
 				.setRequired(true)),
 	async execute(interaction) {
