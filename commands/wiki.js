@@ -36,6 +36,11 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Compiling-from-source",
 		description: `Information pertaining to building a Stockfish binary from the source code on different systems.`,
 	},
+	"use_stockfish": {
+		name: "Use Stockfish",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Developers#using-stockfish-in-your-own-project",
+		description: ``,
+	},
 	"participate": {
 		name: "Participate",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Developers#participating-in-the-project",
@@ -101,9 +106,19 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-from-speedups",
 		description: ``,
 	},
+	"game_length": {
+		name: "Game Length",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#distribution-of-lengths-of-games-at-ltc-6006-on-fishtest",
+		description: ``,
+	},
 	"time_odds": {
 		name: "Time Odds",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-gain-with-time-odds",
+		description: ``,
+	},
+	"nnue_one_year": {
+		name: "One year on NNUE",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#one-year-of-nnue-speed-improvements",
 		description: ``,
 	},
 	"fishtest": {
@@ -115,7 +130,7 @@ const wikiTable = {
 		name: "NNUE Pytorch",
 		url: "https://github.com/glinscott/nnue-pytorch",
 		description: ``,
-	}
+	},
 }
 
 var options = []
