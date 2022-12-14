@@ -4,7 +4,8 @@
   "description": "discord bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "load": "node deploy-commands.js",
+    "start": "node index.js"
   },
   "author": "Disservin",
   "license": "GPL-3.0",
