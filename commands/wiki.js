@@ -157,10 +157,6 @@ module.exports = {
 	async execute(interaction) {
 		const page = wikiTable[interaction.options.getString('query')]
 		const embed = {
-			author: {
-				name: "Stockfish Wiki Bot",
-				icon_url: "https://stockfishchess.org/images/logo/icon_128x128@2x.png",
-			},
 			title: page.name,
 			url: page.url,
 			description: page.description,
