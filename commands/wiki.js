@@ -64,12 +64,8 @@ const wikiTable = {
 	"regression_tests": {
 		name: "Regression Tests",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Regression-Tests",
-		description: ``,
-	},
-	"current_dev": {
-		name: "Current Development",
-		url: "https://github.com/official-stockfish/Stockfish/wiki/Regression-Tests#current-development",
-		description: ``,
+		description: `Regression testing is re-running functional and non-functional tests to ensure that previously developed and tested software still performs as expected after a change.
+		If not, that would be called a regression.`,
 	},
 	"faq": {
 		name: "FAQ",
@@ -84,52 +80,62 @@ const wikiTable = {
 	"depth_vs_tc": {
 		name: "Depth vs TC",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#depth-vs-tc",
-		description: ``,
+		description: `Statistics about the reached depth in fishtest testing conditions.`,
 	},
 	"elo_hash": {
 		name: "Elo Hash",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-cost-of-small-hash",
-		description: ``,
+		description: `We measure the influence of Hash on the playing strength, using games of SF15.1 at LTC (60+0.6s) and VLTC (240+2.4s) on the UHO book.
+		Hash is varied between 1 and 64 MB and 256MB in powers of two, leading to as average hashfull between 100 and 950 per thousand.
+		The data suggests that keeping hashfull below 30% is best to maintain strength.`,
 	},
 	"elo_syzygy": {
 		name: "Elo syzygy",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-gain-using-syzygy",
-		description: ``,
+		description: `Consistent measurement of Elo gain (syzygy 6men vs none) for various SF versions:`,
 	},
 	"threading_effeciency": {
 		name: "Threading Efficiency",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#threading-efficiency-and-elo-gain",
-		description: ``,
+		description: `Here we look at the threading efficiency of the lazySMP parallelization scheme.
+		To focus on the algorithm we play games with a given budget of nodes rather than at a given TC.
+		In principle, lazySMP has excellent scaling of the nps with cores, but practical measurement is influenced by e.g. frequency adjustments, SMT/hyperthreading, and sometimes hardware limitation.`,
 	},
 	"elo_speedups": {
 		name: "Elo Speedups",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-from-speedups",
-		description: ``,
+		description: `For small speedups (<~5%) the linear estimate can be used that gives Elo gain as a function of speedup percentage (x) as:
+
+		Elo_stc(x) = 2.10 x
+		Elo_ltc(x) = 1.43 x
+		To have 50% passing chance at STC<-0.5,1.5>, we need a 0.24% speedup, while at LTC<0.25,1.75> we need 0.70% speedup. A 1% speedup has nearly 85% passing chance at LTC.`,
 	},
 	"game_length": {
 		name: "Game Length",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#distribution-of-lengths-of-games-at-ltc-6006-on-fishtest",
-		description: ``,
+		description: `In a collection of a few million games, the longest was 902 plies.`,
 	},
 	"time_odds": {
 		name: "Time Odds",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-gain-with-time-odds",
-		description: ``,
+		description: `Elo gain with time odds`,
 	},
 	"nnue_one_year": {
 		name: "One year on NNUE",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#one-year-of-nnue-speed-improvements",
-		description: ``,
+		description: `Presents nodes per second (nps) measurements for all SF version between the first NNUE commit (SF_NNUE, Aug 2th 2020) and end of July 2021 on a AMD Ryzen 9 3950X compiled with make -j ARCH=x86-64-avx2 profile-build.
+		The last nps reported for a depth 22 search from startpos using NNUE (best over about 20 measurements) is shown in the graph.
+		For reference, the last classical evaluation (SF_classical, July 30 2020) has 2.30 Mnps.`,
 	},
 	"fishtest": {
 		name: "Fishtest",
 		url: "https://github.com/glinscott/fishtest",
-		description: ``,
+		description: `Fishtest is a distributed task queue for testing chess engines.`,
 	},
 	"nnue_pytorch": {
 		name: "NNUE Pytorch",
 		url: "https://github.com/glinscott/nnue-pytorch",
-		description: ``,
+		description: `Stockfish NNUE (Chess evaluation) trainer in Pytorch.`,
 	},
 }
 
