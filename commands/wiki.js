@@ -143,11 +143,6 @@ module.exports = {
 			title: page.name,
 			url: page.url,
 			description: page.description,
-			timestamp: new Date().toISOString(),
-			footer: {
-				text: interaction.user.username,
-				icon_url: interaction.user.avatarURL()
-			}
 		}
 		await interaction.reply({ embeds: [embed] });
 	},
