@@ -83,19 +83,14 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ",
 		description: `Frequently asked questions pertaining to various Stockfish projects.`,
 	},
-	"faq": {
-		name: "FAQ",
-		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ",
-		description: `Frequently asked questions pertaining to various Stockfish projects.`,
-	},
-	"eval_interpretation": {
-		name: "Interpretation of the evaluation",
-		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#interpretation-of-the-stockfish-evaluation",
-		description: `The evaluation of a position that results from search has traditionally been measured in pawns or centipawns (1 pawn = 100 centipawns).
-		A value of 1, implied a 1 pawn advantage. However, with engines being so strong, and the NNUE evaluation being much less tied to material value, a new scheme was needed.
-		The new normalized evaluation is now linked to the probability of winning, with a 1.0 pawn advantage being a 0.5 (that is 50%) win probability.
-		An evaluation of 0.0 means equal chances for a win or a loss, but also nearly 100% chance of a draw.`,
-	},
+	// "eval_interpretation": {
+	// 	name: "Interpretation of the evaluation",
+	// 	url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#interpretation-of-the-stockfish-evaluation",
+	// 	description: `The evaluation of a position that results from search has traditionally been measured in pawns or centipawns (1 pawn = 100 centipawns).
+	// 	A value of 1, implied a 1 pawn advantage. However, with engines being so strong, and the NNUE evaluation being much less tied to material value, a new scheme was needed.
+	// 	The new normalized evaluation is now linked to the probability of winning, with a 1.0 pawn advantage being a 0.5 (that is 50%) win probability.
+	// 	An evaluation of 0.0 means equal chances for a win or a loss, but also nearly 100% chance of a draw.`,
+	// },
 	"depth_vs_tc": {
 		name: "Depth vs TC",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#depth-vs-tc",
@@ -138,12 +133,6 @@ const wikiTable = {
 		name: "Time Odds",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-gain-with-time-odds",
 		description: `Elo gain with time odds`,
-	},
-	"nnue_one_year": {
-		name: "One year on NNUE",
-		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#one-year-of-nnue-speed-improvements",
-		description: `
-		Comparison of stockfish's mnps throughout 2020-2021.`,
 	},
 	"fishtest": {
 		name: "Fishtest",
