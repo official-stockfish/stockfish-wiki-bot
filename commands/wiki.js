@@ -5,7 +5,7 @@ const wikiTable = {
 		name: "Home",
 		url: "https://github.com/official-stockfish/Stockfish/wiki",
 		description: `Stockfish is a free, powerful and open-source UCI chess engine derived from Glaurung 2.1.
-		Stockfish is not a complete chess program and requires a UCI-compatible graphical user interface (GUI) (e.g. XBoard with PolyGlot, Scid, Cute Chess, eboard, Arena, Sigma Chess, Shredder, Chess Partner or Fritz) in order to be used comfortably.`,
+		Stockfish is not a complete chess program and requires a UCI-compatible graphical user interface (GUI) in order to be used comfortably.`,
 	},
 	"syzygy": {
 		name: "Syzygy Tablebases",
@@ -17,14 +17,17 @@ const wikiTable = {
 	"large_pages": {
 		name: "Large Pages",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Advanced-topics#large-pages",
-		description: `Stockfish supports large pages on Linux and Windows. Large pages make the hash access more efficient, improving the engine speed, especially on large hash sizes.
+		description: `Stockfish supports large pages on Linux and Windows.
+		Large pages make the hash access more efficient, improving the engine speed, especially on large hash sizes.
+
 		The support is automatic, Stockfish attempts to use large pages when available and will fall back to regular memory allocation when this is not the case.
 		Typical increases are 5-10% in terms of nodes per second, but speed increases up to 30% have been measured.`,
 	},
 	"cluster": {
 		name: "Cluster",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Advanced-topics#cluster-version",
-		description: `There is a branch developed with a MPI cluster implementation of Stockfish, allowing stockfish to run on clusters of compute nodes connected with a high-speed network. See https://github.com/official-stockfish/Stockfish/pull/1571 for some discussion of the initial implementation and https://github.com/official-stockfish/Stockfish/pull/1931 for some early performance results.`,
+		description: `There is a branch developed with a MPI cluster implementation of Stockfish, allowing stockfish to run on clusters of compute nodes connected with a high-speed network.
+		See https://github.com/official-stockfish/Stockfish/pull/1571 for some discussion of the initial implementation and https://github.com/official-stockfish/Stockfish/pull/1931 for some early performance results.`,
 	},
 	"commands": {
 		name: "Commands",
@@ -36,10 +39,18 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Compiling-from-source",
 		description: `Information pertaining to building a Stockfish binary from the source code on different systems.`,
 	},
+	"optimized_compiling": {
+		name: "Optimize Stockfish",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Compiling-from-source#optimize-for-your-cpu",
+		description: `Information on how to build an optimized version of Stockfish for your CPU.`,
+	},
 	"use_stockfish": {
 		name: "Use Stockfish",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Developers#using-stockfish-in-your-own-project",
-		description: ``,
+		description: `Stockfish is free, and distributed under the GNU General Public License version 3 (GPL v3).
+		Essentially, this means you are free to do almost exactly what you want with the program,
+		including distributing it among your friends, making it available for download from your website,
+		selling it (either by itself or as part of some bigger software package), or using it as the starting point for a software project of your own.`,
 	},
 	"participate": {
 		name: "Participate",
@@ -72,10 +83,18 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ",
 		description: `Frequently asked questions pertaining to various Stockfish projects.`,
 	},
-	"terminology": {
-		name: "Terminology",
-		url: "https://github.com/official-stockfish/Stockfish/wiki/Terminology",
-		description: `List of frequently used terminolory related to engine development.`,
+	"faq": {
+		name: "FAQ",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ",
+		description: `Frequently asked questions pertaining to various Stockfish projects.`,
+	},
+	"eval_interpretation": {
+		name: "Interpretation of the evaluation",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#interpretation-of-the-stockfish-evaluation",
+		description: `The evaluation of a position that results from search has traditionally been measured in pawns or centipawns (1 pawn = 100 centipawns).
+		A value of 1, implied a 1 pawn advantage. However, with engines being so strong, and the NNUE evaluation being much less tied to material value, a new scheme was needed.
+		The new normalized evaluation is now linked to the probability of winning, with a 1.0 pawn advantage being a 0.5 (that is 50%) win probability.
+		An evaluation of 0.0 means equal chances for a win or a loss, but also nearly 100% chance of a draw.`,
 	},
 	"depth_vs_tc": {
 		name: "Depth vs TC",
@@ -85,9 +104,8 @@ const wikiTable = {
 	"elo_hash": {
 		name: "Elo Hash",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-cost-of-small-hash",
-		description: `We measure the influence of Hash on the playing strength, using games of SF15.1 at LTC (60+0.6s) and VLTC (240+2.4s) on the UHO book.
-		Hash is varied between 1 and 64 MB and 256MB in powers of two, leading to as average hashfull between 100 and 950 per thousand.
-		The data suggests that keeping hashfull below 30% is best to maintain strength.`,
+		description: `The amount of hash allocated for the engine to use is an important factor in the playing strength.
+		Data suggests that keeping hashfull below 30% is best to maintain strength.`,
 	},
 	"elo_syzygy": {
 		name: "Elo syzygy",
@@ -98,7 +116,6 @@ const wikiTable = {
 		name: "Threading Efficiency",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#threading-efficiency-and-elo-gain",
 		description: `Here we look at the threading efficiency of the lazySMP parallelization scheme.
-		To focus on the algorithm we play games with a given budget of nodes rather than at a given TC.
 		In principle, lazySMP has excellent scaling of the nps with cores, but practical measurement is influenced by e.g. frequency adjustments, SMT/hyperthreading, and sometimes hardware limitation.`,
 	},
 	"elo_speedups": {
@@ -108,7 +125,9 @@ const wikiTable = {
 
 		Elo_stc(x) = 2.10 x
 		Elo_ltc(x) = 1.43 x
-		To have 50% passing chance at STC<-0.5,1.5>, we need a 0.24% speedup, while at LTC<0.25,1.75> we need 0.70% speedup. A 1% speedup has nearly 85% passing chance at LTC.`,
+
+		To have 50% passing chance at STC<-0.5,1.5>, we need a 0.24% speedup, while at LTC<0.25,1.75> we need 0.70% speedup.
+		A 1% speedup has nearly 85% passing chance at LTC.`,
 	},
 	"game_length": {
 		name: "Game Length",
@@ -123,9 +142,8 @@ const wikiTable = {
 	"nnue_one_year": {
 		name: "One year on NNUE",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#one-year-of-nnue-speed-improvements",
-		description: `Presents nodes per second (nps) measurements for all SF version between the first NNUE commit (SF_NNUE, Aug 2th 2020) and end of July 2021 on a AMD Ryzen 9 3950X compiled with make -j ARCH=x86-64-avx2 profile-build.
-		The last nps reported for a depth 22 search from startpos using NNUE (best over about 20 measurements) is shown in the graph.
-		For reference, the last classical evaluation (SF_classical, July 30 2020) has 2.30 Mnps.`,
+		description: `
+		Comparison of stockfish's mnps throughout 2020-2021.`,
 	},
 	"fishtest": {
 		name: "Fishtest",
@@ -140,11 +158,21 @@ const wikiTable = {
 	"optimal_settings": {
 		name: "Optimal Settings",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#optimal-settings",
-		description: `Threads: Set the number of threads to the maximum available, possibly leaving 1 or 2 threads free for other tasks.
-							   SMT or Hyper-threading is beneficial, so normally the number of threads available is twice the number of cores available.
-					  Hash: Set the hash to nearly the maximum amount of memory (RAM) available, leaving some memory free for other tasks.
-					        The Hash can be any value, not just powers of two. The value is specified in MiB.
-					  MultiPV: 1`,
+		description: `Threads: 
+		
+		Set the number of threads to the maximum available, possibly leaving 1 or 2 threads free for other tasks.
+		SMT or Hyper-threading is beneficial, so normally the number of threads available is twice the number of cores available.
+		Hash: 
+		
+		Set the hash to nearly the maximum amount of memory (RAM) available, leaving some memory free for other tasks.
+		The Hash can be any value, not just powers of two. The value is specified in MiB.
+
+		MultiPV: 1`,
+	},
+	"elo_rating": {
+		name: "Elo rating",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#the-elo-rating-of-stockfish",
+		description: `Interpretation of elo ratings.`,
 	}
 }
 
