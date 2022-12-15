@@ -137,6 +137,15 @@ const wikiTable = {
 		url: "https://github.com/glinscott/nnue-pytorch",
 		description: `Stockfish NNUE (Chess evaluation) trainer in Pytorch.`,
 	},
+	"optimal_settings": {
+		name: "Optimal Settings",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#optimal-settings",
+		description: `Threads: Set the number of threads to the maximum available, possibly leaving 1 or 2 threads free for other tasks.
+							   SMT or Hyper-threading is beneficial, so normally the number of threads available is twice the number of cores available.
+					  Hash: Set the hash to nearly the maximum amount of memory (RAM) available, leaving some memory free for other tasks.
+					        The Hash can be any value, not just powers of two. The value is specified in MiB.
+					  MultiPV: 1`,
+	}
 }
 
 var options = []
