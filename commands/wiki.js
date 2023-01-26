@@ -12,7 +12,10 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Advanced-topics#syzygy-tablebases",
 		description: `If the engine is searching a position that is not in the tablebases (e.g. a position with 8 pieces), it will access the tablebases during the search. If the engine reports a very large score, this means it has found a winning line into a tablebase position.
 
-		If the engine is given a position to search that is in the tablebases, it will use the tablebases at the beginning of the search to preselect all good moves, i.e. all moves that preserve the win or preserve the draw while taking into account the 50-move rule. It will then perform a search only on those moves. The engine will not move immediately, unless there is only a single good move. The engine likely will not report a mate score, even if the position is known to be won.`,
+		If the engine is given a position to search that is in the tablebases, it will use the tablebases at the beginning of the search to preselect all good moves, i.e. all moves that preserve the win or preserve the draw while taking into account the 50-move rule. It will then perform a search only on those moves. The engine will not move immediately, unless there is only a single good move. The engine likely will not report a mate score, even if the position is known to be won.
+		
+		How much elo does syzygy gain?
+		https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-gain-using-syzygy`,
 	},
 	"large_pages": {
 		name: "Large Pages",
@@ -39,12 +42,7 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Compiling-from-source",
 		description: `Information pertaining to building a Stockfish binary from the source code on different systems.`,
 	},
-	"optimized_compiling": {
-		name: "Optimize Stockfish",
-		url: "https://github.com/official-stockfish/Stockfish/wiki/Compiling-from-source#optimize-for-your-cpu",
-		description: `Information on how to build an optimized version of Stockfish for your CPU.`,
-	},
-	"use_stockfish": {
+	"license": {
 		name: "Use Stockfish",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Developers#using-stockfish-in-your-own-project",
 		description: `Stockfish is free, and distributed under the GNU General Public License version 3 (GPL v3).
@@ -57,8 +55,8 @@ const wikiTable = {
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Developers#participating-in-the-project",
 		description: `Stockfish's improvement over the last decade has been a great community effort. There are a few ways to help contribute to its growth.`,
 	},
-	"download": {
-		name: "Download",
+	"howto": {
+		name: "How to use Stockfish",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Download-and-usage",
 		description: `Stockfish binary downloads for different systems and architectures.`,
 	},
@@ -97,15 +95,10 @@ const wikiTable = {
 		description: `Statistics about the reached depth in fishtest testing conditions.`,
 	},
 	"elo_hash": {
-		name: "Elo Hash",
+		name: "Optimal Hash",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-cost-of-small-hash",
 		description: `The amount of hash allocated for the engine to use is an important factor in the playing strength.
 		Data suggests that keeping hashfull below 30% is best to maintain strength.`,
-	},
-	"elo_syzygy": {
-		name: "Elo syzygy",
-		url: "https://github.com/official-stockfish/Stockfish/wiki/Useful-data#elo-gain-using-syzygy",
-		description: `Consistent measurement of Elo gain (syzygy 6men vs none) for various SF versions:`,
 	},
 	"threading_effeciency": {
 		name: "Threading Efficiency",
@@ -151,8 +144,8 @@ const wikiTable = {
 		
 		Set the number of threads to the maximum available, possibly leaving 1 or 2 threads free for other tasks.
 		SMT or Hyper-threading is beneficial, so normally the number of threads available is twice the number of cores available.
-		Hash: 
 		
+		Hash: 
 		Set the hash to nearly the maximum amount of memory (RAM) available, leaving some memory free for other tasks.
 		The Hash can be any value, not just powers of two. The value is specified in MiB.
 
@@ -162,6 +155,12 @@ const wikiTable = {
 		name: "Elo rating",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#the-elo-rating-of-stockfish",
 		description: `Interpretation of elo ratings.`,
+	},
+	"crash": {
+		name: "Stockfish crashed",
+		url: "https://github.com/official-stockfish/Stockfish/wiki/Stockfish-FAQ#stockfish-crashed",
+		description: `Stockfish may crash if fed incorrect fens, or fens with illegal positions.
+		Follow the link to read more about it.`,
 	}
 }
 
