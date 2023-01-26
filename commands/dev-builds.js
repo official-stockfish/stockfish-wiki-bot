@@ -19,7 +19,7 @@ module.exports = {
         try {
             const response = await axios.get(`https://api.github.com/repos/${repository}/actions/runs?branch=${branch}&event=${event}&sort=asc&direction=desc`, {headers});
             const latestRun = response.data.workflow_runs[0];
-            const link = `https://github.com/${repository}/actions/runs/${latestRun.id}`;
+            const link = `https://github.com/${repository}/actions/runs/${latestRun.id}#artifacts`;
             const embed = {
                 title: "dev-builds",
                 url: link,
