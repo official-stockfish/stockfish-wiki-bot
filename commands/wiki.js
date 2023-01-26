@@ -58,7 +58,7 @@ const wikiTable = {
 	"howto": {
 		name: "How to use Stockfish",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Download-and-usage",
-		description: `Stockfish binary downloads for different systems and architectures.`,
+		description: `A guide on how you can download Stockfish and run it on your PC.`,
 	},
 	"gui": {
 		name: "GUI",
