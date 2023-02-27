@@ -69,7 +69,7 @@ const wikiTable = {
 		name: "UCI",
 		url: "https://backscattering.de/chess/uci/",
 		description: `How to use UCI to operate a chess engine via command line.`,
-	}
+	},
 	"governance": {
 		name: "Governance",
 		url: "https://github.com/official-stockfish/Stockfish/wiki/Governance-and-responsibilities",
