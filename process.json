@@ -1,0 +1,14 @@
+{
+    "apps": [
+        {
+            "name": "index",
+            "script": "./index.js",
+            "watch": true
+        },
+        {
+            "name": "deploy-commands",
+            "script": "./deploy-commands.js",
+            "watch": true
+        }
+    ]
+}
