@@ -18,8 +18,7 @@ GITHUB_API_TOKEN=""
 
 ## DISCORD_TOKEN
 
-Discord Tokens can only be viewed once afterwards you have to reset it.  
-Navigate to <https://discord.com/developers/applications> -> Reset Secret.
+Navigate to <https://discord.com/developers/applications> -> Bot -> Token.
 
 ## CLIENT_ID
 
