@@ -14,7 +14,7 @@ npm install
 
 Create a new application for discord here <https://discord.com/developers/applications>.
 
-## Fill out the missing environment variables
+### Fill out the missing environment variables
 
 ```
 DISCORD_TOKEN=""
@@ -23,11 +23,11 @@ GUILD_ID=""
 GITHUB_API_TOKEN=""
 ```
 
-## DISCORD_TOKEN
+### DISCORD_TOKEN
 
 Navigate to <https://discord.com/developers/applications> -> Bot -> Token.
 
-## CLIENT_ID
+### CLIENT_ID
 
 Navigate to <https://discord.com/developers/applications> -> OAuth2 -> General and copy the `CLIENT_ID`.
 
