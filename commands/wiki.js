@@ -72,20 +72,16 @@ module.exports = {
     const subs = subcommands[interaction.options.getSubcommand()];
     let page = null;
 
-    console.log(query);
     for (const sub of subs) {
-      console.log(sub);
       if (sub["name"] === query) {
         page = sub;
         break;
       }
     }
-    console.log(page);
 
     const embed = {
       title: page["name"],
       url: page["url"],
-      //   description: page["description"],
     };
     await interaction.reply({ embeds: [embed] });
   },
