@@ -9,8 +9,8 @@ const files = fs.readdirSync(wikiDirectory);
 // Create an object to store the subcommands
 const subcommands = {};
 
-const reduce = function (na) {
-  return na.toLowerCase().replace(/-/g, "-");
+const reduce = function (inputString) {
+    return inputString.replace(/[^\w- ]/g, '').replace(/\s+/g, '-').toLowerCase();
 };
 
 // Parse the markdown files to extract the headings
@@ -20,17 +20,17 @@ files.forEach((file) => {
     const fileContent = fs.readFileSync(filePath, "utf8");
     const headings = fileContent.match(/^#\s(.*)$/gm);
     if (headings && headings.length > 0) {
-      const key = reduce(file).slice(0, file.length - 3);
+      const key = reduce(file.slice(0, file.length - 3));
       subcommands[key] = headings.map((heading) => ({
-        name: reduce(heading.substr(2)),
+        name: reduce(heading.slice(2, heading.length)),
         url:
           `https://github.com/official-stockfish/Stockfish/wiki/${path.basename(
             file,
             ".md"
           )}` +
           "#" +
-          heading.substr(2).toLowerCase().replace(/ /g, "-"),
-        value: heading.substr(2).toLowerCase(),
+          reduce(heading.slice(2, heading.length)),
+        value: heading.slice(2, heading.length).toLowerCase(),
       }));
 
       if (subcommands.length > 25) {
