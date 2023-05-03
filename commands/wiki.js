@@ -10,7 +10,7 @@ const files = fs.readdirSync(wikiDirectory);
 const subcommands = {};
 
 const reduce = function (inputString) {
-    return inputString.replace(/[^\w- ]/g, '').replace(/\s+/g, '-').toLowerCase();
+    return inputString.replace(/[^\w- ]/g, '').replace(/\s/g, '-').toLowerCase();
 };
 
 // Parse the markdown files to extract the headings
