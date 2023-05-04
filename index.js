@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const fs = require('node:fs');
 const path = require('node:path');
@@ -25,7 +25,8 @@ for (const file of eventFiles) {
 	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
-	} else {
+	}
+	else {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }

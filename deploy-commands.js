@@ -1,7 +1,7 @@
-require('dotenv').config()
+require('dotenv').config();
 
 const { REST, Routes } = require('discord.js');
-const { clientId, guildId, token } = {"clientId": process.env.CLIENT_ID, "guildId": process.env.GUILD_ID, "token": process.env.DISCORD_TOKEN};
+const { clientId, guildId, token } = { 'clientId': process.env.CLIENT_ID, 'guildId': process.env.GUILD_ID, 'token': process.env.DISCORD_TOKEN };
 
 const fs = require('node:fs');
 
@@ -32,7 +32,8 @@ const rest = new REST({ version: '10' }).setToken(token);
 		);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-	} catch (error) {
+	}
+	catch (error) {
 		// And of course, make sure you catch and log any errors!
 		console.error(error);
 	}
