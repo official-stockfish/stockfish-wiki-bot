@@ -24,12 +24,23 @@ files.forEach((file) => {
 		const fileName = path.basename(file, '.md');
 		const markdownContent = fs.readFileSync(filePath, 'utf-8');
 		const tokens = marked.lexer(markdownContent);
-		const headings = tokens.filter(token => token.type === 'heading' && token.depth === 1).map(token => token.text);
 
 		subcommands[reduce(fileName)] = {
 			file: fileName,
-			queries: headings,
+			queries: [],
 		};
+
+		tokens.forEach(token => {
+			if (token.type === 'heading' && token.depth === 1) {
+				subcommands[reduce(fileName)].queries.push([token.text, []]);
+			}
+			else if (token.type === 'heading' && token.depth === 2) {
+				const previoush1 = subcommands[reduce(fileName)].queries[subcommands[reduce(fileName)].queries.length - 1];
+				if (previoush1) {
+					previoush1[1].push(token.text);
+				}
+			}
+		});
 
 		if (subcommands.length > 25) {
 			subcommands.length = 25;
@@ -44,21 +55,18 @@ const commandData = new SlashCommandBuilder()
 
 // loop over keys
 for (const [key, value] of Object.entries(subcommands)) {
-	const choices = value.queries.map(query => ({ name: query, value: query }));
-	if (Object.keys(value).length > 25) {
-		continue;
-	}
+	const choices = value.queries.map(query => ({ name: query[0], value: query[0] }));
 	commandData.addSubcommand((subcommand) => {
 		const option = subcommand
 			.setName(key)
-			.setDescription(key);
+			.setDescription(value.file.replace(/-/g, ' '));
 
 		if (value.queries.length > 0) {
 			option.addStringOption((opt) =>
 				opt
 					.setName('query')
 					.setDescription('Choose a heading')
-					.addChoices(...choices)
+					.addChoices(...choices.slice(0, 25))
 					.setRequired(false),
 			);
 		}
@@ -75,18 +83,32 @@ module.exports = {
 		const requestedSub = subcommands[interaction.options.getSubcommand()];
 
 		const embed = {
-			title: requestedSub.file.replace(/-/g, ' '),
+			author: {
+				name: 'Stockfish Wiki',
+				icon_url: 'https://raw.githubusercontent.com/daylen/stockfish-web/master/static/images/logo/icon_128x128.png',
+				url: baseUrl,
+			},
+			title: `**${requestedSub.file.replace(/-/g, ' ')}**`,
 			url: baseUrl + reduce(requestedSub.file),
 			color: parseInt('518047', 16),
+			description: '',
 		};
 
 		if (requestedQuery) {
-			for (const subQuery of requestedSub['queries']) {
-				if (subQuery === requestedQuery) {
+			for (const subQuery of requestedSub.queries) {
+				if (subQuery[0] === requestedQuery) {
 					embed.title += ': ' + requestedQuery;
 					embed.url += '#' + reduce(requestedQuery);
+					subQuery[1].forEach(h2 => {
+						embed.description += `- [${h2}](${baseUrl + reduce(requestedSub.file)}#${reduce(h2)})\n`;
+					});
 					break;
 				}
+			}
+		}
+		else {
+			for (const subQuery of requestedSub.queries) {
+				embed.description += `- [${subQuery[0]}](${baseUrl + reduce(requestedSub.file)}#${reduce(subQuery[0])})\n`;
 			}
 		}
 
