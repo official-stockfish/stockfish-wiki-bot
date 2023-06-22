@@ -17,6 +17,7 @@ module.exports = {
 		try {
 			const response = await axios.get(`https://api.github.com/repos/${repository}/releases`, { headers });
 			const latestRelease = response.data[0];
+			const preRelease = latestRelease.prerelease;
 			const name = latestRelease.name;
 			const link = latestRelease.html_url;
 			const embed = {
@@ -25,7 +26,7 @@ module.exports = {
 					icon_url: 'https://raw.githubusercontent.com/daylen/stockfish-web/master/static/images/logo/icon_128x128.png',
 					url: `https://github.com/${repository}/releases`,
 				},
-				title: `**Latest release**: ${name}`,
+				title: `**Latest ${preRelease ? 'pre-' : ''}release**: ${name}`,
 				url: link,
 				description: '',
 				color: parseInt('518047', 16),
