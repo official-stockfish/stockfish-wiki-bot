@@ -10,22 +10,31 @@ module.exports = {
 		.setDescription('The latest stockfish dev builds'),
 	async execute(interaction) {
 		const repository = 'official-stockfish/Stockfish';
-		const branch = 'master';
-		const event = 'push';
 		const headers = {
 			'Authorization': `Bearer ${token}`,
 			'Accept': 'application/vnd.github+json',
 		};
 		try {
-			const response = await axios.get(`https://api.github.com/repos/${repository}/actions/runs?branch=${branch}&event=${event}&sort=asc&direction=desc`, { headers });
-			const latestRun = response.data.workflow_runs[0];
-			const link = `https://github.com/${repository}/actions/runs/${latestRun.id}#artifacts`;
+			const response = await axios.get(`https://api.github.com/repos/${repository}/releases`, { headers });
+			const latestRelease = response.data[0];
+			const name = latestRelease.name;
+			const link = latestRelease.html_url;
 			const embed = {
-				title: 'dev-builds',
+				author: {
+					name: 'Stockfish Releases',
+					icon_url: 'https://raw.githubusercontent.com/daylen/stockfish-web/master/static/images/logo/icon_128x128.png',
+					url: `https://github.com/${repository}/releases`,
+				},
+				title: `**Latest release**: ${name}`,
 				url: link,
-				description: 'The latest builds can be found under \'artifacts\' at the bottom of the page.',
+				description: '',
 				color: parseInt('518047', 16),
 			};
+			if (latestRelease.assets.length > 0) {
+				for (const asset of latestRelease.assets) {
+					embed.description += `- [${asset.name}](${asset.browser_download_url})\n`;
+				}
+			}
 			await interaction.reply({ embeds: [embed] });
 		}
 		catch (error) {
