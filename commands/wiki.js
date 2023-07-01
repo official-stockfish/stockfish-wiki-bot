@@ -31,10 +31,10 @@ files.forEach((file) => {
 		};
 
 		tokens.forEach(token => {
-			if (token.type === 'heading' && token.depth === 1) {
+			if (token.type === 'heading' && token.depth === 2) {
 				subcommands[reduce(fileName)].queries.push([token.text, []]);
 			}
-			else if (token.type === 'heading' && token.depth === 2) {
+			else if (token.type === 'heading' && token.depth === 3) {
 				const previoush1 = subcommands[reduce(fileName)].queries[subcommands[reduce(fileName)].queries.length - 1];
 				if (previoush1) {
 					previoush1[1].push(token.text);
