@@ -19,7 +19,10 @@ module.exports = {
 		const formatted = await format(content, true);
 
 		if (!formatted) {
-			await interaction.reply("Could not format message");
+			await interaction.reply({
+				content: "Could not format message",
+				ephemeral: true,
+			});
 			return;
 		}
 
