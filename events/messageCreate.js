@@ -1,5 +1,3 @@
-require("dotenv").config();
-
 const { Events } = require("discord.js");
 const { format } = require("../format/format");
 
