@@ -18,7 +18,7 @@ module.exports = {
 
 		const formatted = await format(content, true);
 
-		if (!formatted) {
+		if (!formatted || formatted === "error") {
 			await interaction.reply({
 				content: "Could not format message",
 				ephemeral: true,

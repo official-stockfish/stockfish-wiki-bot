@@ -77,7 +77,7 @@ async function format(message, isAppsCommand = false) {
 		return `\`\`\`${formatPGN(pgn)}\`\`\``;
 	}
 
-	return `Could not format message.`;
+	return "error";
 }
 
 module.exports = {
