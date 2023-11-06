@@ -12,10 +12,16 @@ module.exports = {
 
 		const stm = fen.split(" ")[1] === "w" ? "white" : "black";
 
+		const analysisUrl = `https://lichess.org/analysis/standard/${encodeURI(
+			fen
+		)}`;
+
 		const imageUrl = `https://lichess1.org/export/fen.gif?fen=${encodeURI(
 			fen
 		)}&color=${stm}`;
 
-		await interaction.reply(`\`\`\`${fen}\`\`\`[Image](${imageUrl})`);
+		await interaction.reply(
+			`\`\`\`${fen}\`\`\`[Lichess Link](<${analysisUrl}>) | [Image](${imageUrl})`
+		);
 	},
 };
