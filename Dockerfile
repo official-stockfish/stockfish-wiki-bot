@@ -17,4 +17,4 @@ RUN apk --no-cache add nodejs ca-certificates
 WORKDIR /root/
 COPY --from=builder /usr/src/app ./
 RUN node deploy-commands.js
-CMD [ "node", "index.js" ]
+CMD [ "npm", "run", "start" ]
