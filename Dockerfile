@@ -3,6 +3,7 @@ FROM node:20 as development
 
 WORKDIR /usr/src/app
 COPY . .
+RUN git submodule update --init
 RUN npm install
 CMD [ "npm", "run", "start" ]
 
