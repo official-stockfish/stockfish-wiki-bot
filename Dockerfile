@@ -1,5 +1,6 @@
 # Development stage
 FROM node:20 as development
+
 WORKDIR /usr/src/app
 COPY . .
 RUN npm install
@@ -11,7 +12,8 @@ WORKDIR /usr/src/app
 
 # Production stage
 FROM alpine:latest as production
-WORKDIR /usr/src/app
+RUN apk --no-cache add nodejs ca-certificates
+WORKDIR /root/
 COPY --from=builder /usr/src/app ./
-RUN npm ci --only=production
-CMD [ "npm", "run", "start" ]
+RUN node deploy-commands.js
+CMD [ "node", "index.js" ]
