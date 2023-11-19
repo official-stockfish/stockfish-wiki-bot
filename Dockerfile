@@ -16,5 +16,4 @@ FROM alpine:latest as production
 RUN apk --no-cache add nodejs ca-certificates
 WORKDIR /root/
 COPY --from=builder /usr/src/app ./
-RUN node deploy-commands.js
-CMD [ "npm", "run", "start" ]
+CMD node deploy-commands.js && node index.js
