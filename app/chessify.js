@@ -1,7 +1,7 @@
 const PGN_PATTERN =
 	/\s*(\d{1,3})\.?\s*((?:(?:O-O(?:-O)?)|(?:[KQNBR][1-8a-h]?x?[a-h]x?[1-8])|(?:[a-h]x?[a-h]?[1-8]\=?[QRNB]?))\+?)(?:\s*\d+\.?\d+?m?s)?\.?\s*((?:(?:O-O(?:-O)?)|(?:[KQNBR][1-8a-h]?x?[a-h]x?[1-8])|(?:[a-h]x?[a-h]?[1-8]\=?[QRNB]?))\+?)?(?:\s*\d+\.?\d+?m?s)?/g;
 const FEN_PATTERN =
-	/[rnbqkpRNBQKP1-8\/]+ [wb-]+ (K?Q?k?q?|-) ([a-h][1-8]|-)( \d+ \d+)?$/gm;
+	/[rnbqkpRNBQKP1-8\/]+ [wb-]+ (K?Q?k?q?|-) ([a-h][1-8]|-)( \d+ \d+)?/gm;
 
 function formatPGN(pgn) {
 	const newLines = [];
