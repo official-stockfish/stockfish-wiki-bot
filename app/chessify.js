@@ -40,7 +40,8 @@ async function chessify(message, isAppsCommand = false) {
 
 	if (
 		!isAppsCommand &&
-		(message.reference === null || message.content.trim() !== `${prefix}format`)
+		(message.reference === null ||
+			message.content.trim() !== `${prefix}chessify`)
 	) {
 		return undefined;
 	}
