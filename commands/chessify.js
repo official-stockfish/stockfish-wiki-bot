@@ -3,10 +3,10 @@ const {
 	ApplicationCommandType,
 } = require("discord.js");
 
-const { format } = require("../format/format");
+const { chessify } = require("../app/chessify");
 
 const data = new ContextMenuCommandBuilder()
-	.setName("format")
+	.setName("chessify")
 	.setType(ApplicationCommandType.Message);
 
 module.exports = {
@@ -16,7 +16,7 @@ module.exports = {
 			interaction.targetId
 		);
 
-		const formatted = await format(content, true);
+		const formatted = await chessify(content, true);
 
 		if (!formatted || formatted === "error") {
 			await interaction.reply({
