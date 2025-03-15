@@ -89,7 +89,7 @@ module.exports = {
 		const embed = {
 			author: {
 				name: 'Stockfish Wiki',
-				icon_url: 'https://raw.githubusercontent.com/daylen/stockfish-web/master/static/images/logo/icon_128x128.png',
+				icon_url: 'https://raw.githubusercontent.com/official-stockfish/stockfish-web/master/static/images/logo/icon_128x128.png',
 				url: baseUrl + 'Home.html',
 			},
 			title: `**${requestedSub.file.replace(/-/g, ' ')}**`,
