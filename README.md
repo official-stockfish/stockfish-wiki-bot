@@ -45,17 +45,7 @@ Refresh commands run
 Start bot
 `node index.js`
 
-# Server Setup
 
-The server uses pm2 to manage the bot and runs this script every 12hrs.
-
-```
-git -C ../stockfish-wiki-bot/Stockfish.wiki checkout master
-git -C ../stockfish-wiki-bot/Stockfish.wiki pull
-/usr/bin/node /usr/bin/pm2 restart all
-```
-
-and has these two cronjobs
 
 ```
 0 */12 * * * /home/ubuntu/scripts/pull-bot.sh
