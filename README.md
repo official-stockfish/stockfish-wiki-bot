@@ -44,10 +44,3 @@ Refresh commands run
 
 Start bot
 `node index.js`
-
-
-
-```
-0 */12 * * * /home/ubuntu/scripts/pull-bot.sh
-0 */12 * * * /home/ubuntu/scripts/pull-wiki.sh
-```
