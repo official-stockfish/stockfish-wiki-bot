@@ -10,11 +10,15 @@ const files = fs.readdirSync(wikiDirectory);
 // Create an object to store the subcommands
 const subcommands = {};
 
-const reduce = (inputString) => {
-	return inputString.replace(/[^\w- ]/g, '').replace(/\s/g, '-').toLowerCase();
+const slugify = (inputString) => {
+	return inputString.replace(/[^\w\s_/\-.+]/g, '').replace(/[\s_/\-.+]+/g, '-').replace(/-+$/, '').toLowerCase();
 };
 
-const baseUrl = 'https://github.com/official-stockfish/Stockfish/wiki/';
+const simplifyPageName = (name) => {
+	return name.replace(/\s+/g, '-');
+};
+
+const baseUrl = 'https://official-stockfish.github.io/docs/stockfish-wiki/';
 
 // Parse the markdown files to extract the headings
 files.forEach((file) => {
@@ -25,17 +29,17 @@ files.forEach((file) => {
 		const markdownContent = fs.readFileSync(filePath, 'utf-8');
 		const tokens = marked.lexer(markdownContent);
 
-		subcommands[reduce(fileName)] = {
+		subcommands[slugify(fileName)] = {
 			file: fileName,
 			queries: [],
 		};
 
 		tokens.forEach(token => {
 			if (token.type === 'heading' && token.depth === 2) {
-				subcommands[reduce(fileName)].queries.push([token.text, []]);
+				subcommands[slugify(fileName)].queries.push([token.text, []]);
 			}
 			else if (token.type === 'heading' && token.depth === 3) {
-				const previoush1 = subcommands[reduce(fileName)].queries[subcommands[reduce(fileName)].queries.length - 1];
+				const previoush1 = subcommands[slugify(fileName)].queries[subcommands[slugify(fileName)].queries.length - 1];
 				if (previoush1) {
 					previoush1[1].push(token.text);
 				}
@@ -85,11 +89,11 @@ module.exports = {
 		const embed = {
 			author: {
 				name: 'Stockfish Wiki',
-				icon_url: 'https://raw.githubusercontent.com/daylen/stockfish-web/master/static/images/logo/icon_128x128.png',
-				url: baseUrl,
+				icon_url: 'https://raw.githubusercontent.com/official-stockfish/stockfish-web/master/static/images/logo/icon_128x128.png',
+				url: baseUrl + 'Home.html',
 			},
 			title: `**${requestedSub.file.replace(/-/g, ' ')}**`,
-			url: baseUrl + reduce(requestedSub.file),
+			url: baseUrl + simplifyPageName(requestedSub.file) + '.html',
 			color: parseInt('518047', 16),
 			description: '',
 		};
@@ -98,9 +102,9 @@ module.exports = {
 			for (const subQuery of requestedSub.queries) {
 				if (subQuery[0] === requestedQuery) {
 					embed.title += ': ' + requestedQuery;
-					embed.url += '#' + reduce(requestedQuery);
+					embed.url += '#' + slugify(requestedQuery);
 					subQuery[1].forEach(h2 => {
-						embed.description += `- [${h2}](${baseUrl + reduce(requestedSub.file)}#${reduce(h2)})\n`;
+						embed.description += `- [${h2}](${baseUrl}${simplifyPageName(requestedSub.file)}.html#${slugify(h2)})\n`;
 					});
 					break;
 				}
@@ -108,7 +112,7 @@ module.exports = {
 		}
 		else {
 			for (const subQuery of requestedSub.queries) {
-				embed.description += `- [${subQuery[0]}](${baseUrl + reduce(requestedSub.file)}#${reduce(subQuery[0])})\n`;
+				embed.description += `- [${subQuery[0]}](${baseUrl}${simplifyPageName(requestedSub.file)}.html#${slugify(subQuery[0])})\n`;
 			}
 		}
 
