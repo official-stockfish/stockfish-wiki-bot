@@ -1,5 +1,4 @@
 const { MessageFlags, SlashCommandSubcommandBuilder } = require("discord.js");
-const voteManager = require("../../app/voteManager.js");
 
 module.exports = {
   data: new SlashCommandSubcommandBuilder()
