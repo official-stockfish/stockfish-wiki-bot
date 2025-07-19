@@ -13,7 +13,7 @@ module.exports = {
     ),
   async execute(interaction) {
     const voter = interaction.user;
-		const target = interaction.options.getUser("target");
+    const target = interaction.options.getUser("target");
 
     const voterId = voter.id;
     const targetId = target.id;
@@ -36,9 +36,9 @@ module.exports = {
       return;
     }
 
-		await interaction.reply({
+    await interaction.reply({
       content:`voted ${target.username}`,
       flags: MessageFlags.Ephemeral
-		});
+    });
   },
 };
