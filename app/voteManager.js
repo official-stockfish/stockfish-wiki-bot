@@ -129,4 +129,6 @@ class VoteManager {
   }
 }
 
-module.exports = VoteManager;
+const instance = new VoteManager('votes.db');
+
+module.exports = instance;

@@ -4,6 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const { token } = process.env.DISCORD_TOKEN;
+const voteManager = require("./app/voteManager.js");
 
 const client = new Client({
 	intents: [
@@ -44,3 +45,11 @@ for (const file of eventFiles) {
 }
 
 client.login(token);
+
+process.on('SIGINT', () => {
+  console.log('Shutting down...');
+  voteManager.close();
+  client.destroy();
+  console.log('Shutdown complete.');
+  process.exit(0);
+});

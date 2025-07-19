@@ -1,37 +1,34 @@
 const { SlashCommandBuilder } = require("discord.js");
-const VoteManager = require('../app/voteManager.js');
 
-const voteManager = new VoteManager('votes.db');
+const fs = require("node:fs");
+const path = require("node:path");
+
+const subcommandsPath = path.join(__dirname, "vote");
+const subcommandFiles = fs.readdirSync(subcommandsPath).filter(file => file.endsWith(".js"));
+
+const data = new SlashCommandBuilder()
+  .setName("vote")
+  .setDescription("Manage helper votes");
+
+for (const file of subcommandFiles) {
+    const subcommand = require(path.join(subcommandsPath, file));
+    data.addSubcommand(subcommand.data);
+}
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName("vote")
-		.setDescription("Vote a member as helpful")
-    .addUserOption((option) =>
-      option.setName("username").setDescription("Person to vote for").setRequired(true)
-    ),
+	data: data,
 	async execute(interaction) {
-    const voter = interaction.user;
-		const target = interaction.options.getUser("username");
+    const subcommandName = interaction.options.getSubcommand();
+    const subcommand = require(path.join(subcommandsPath, `${subcommandName}.js`));
 
-    const voterId = voter.id;
-    const targetId = target.id;
-
-    if (voterId == targetId) {
-      await interaction.reply({ content: "You can't vote for yourself!", ephemeral: true });
-      return;
+    try {
+      await subcommand.execute(interaction);
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({
+        content: 'There was an error while executing this subcommand!',
+        flags: MessageFlags.Ephemeral
+      });
     }
-
-    const success = voteManager.addVote(voterId, targetId);
-
-    if (!success) {
-      await interaction.reply({ content: "You have already voted for this user!", ephemeral: true });
-      return;
-    }
-
-		await interaction.reply({
-        content:`voted ${target.username}`,
-        ephemeral: true
-		});
 	},
 };
