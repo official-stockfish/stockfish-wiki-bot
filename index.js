@@ -42,7 +42,7 @@ for (const file of eventFiles) {
 	const event = require(filePath);
 
 	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
+		client.once(event.name, (...args) => event.execute(...args, dependencies));
 	} else {
 		client.on(event.name, (...args) => event.execute(...args, dependencies));
 	}

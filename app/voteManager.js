@@ -107,7 +107,7 @@ class VoteManager {
    * @param {number} limit The number of top users to return.
    * @returns {Array<{target_id: number, votes: number}>} An array of objects.
    */
-  getLeaderboard(limit = 10) {
+  getLeaderboard(limit = 15) {
     const sql = `
       SELECT target_id, COUNT(voter_id) as votes
       FROM votes
