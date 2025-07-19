@@ -21,7 +21,7 @@ module.exports = {
 		if (!formatted || formatted === "error") {
 			await interaction.reply({
 				content: "Could not format message",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 			return;
 		}
