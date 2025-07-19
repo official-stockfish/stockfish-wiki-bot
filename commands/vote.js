@@ -5,7 +5,7 @@ const voteManager = new VoteManager('votes.db');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName("vote-helper")
+		.setName("vote")
 		.setDescription("Vote a member as helpful")
     .addUserOption((option) =>
       option.setName("username").setDescription("Person to vote for").setRequired(true)
