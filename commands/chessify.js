@@ -1,6 +1,7 @@
 const {
-	ContextMenuCommandBuilder,
 	ApplicationCommandType,
+	ContextMenuCommandBuilder,
+  MessageFlags,
 } = require("discord.js");
 
 const { chessify } = require("../app/chessify");
@@ -11,7 +12,7 @@ const data = new ContextMenuCommandBuilder()
 
 module.exports = {
 	data: data,
-	async execute(interaction) {
+	async execute(interaction, dependencies) {
 		const content = await interaction.channel.messages.fetch(
 			interaction.targetId
 		);
@@ -21,7 +22,7 @@ module.exports = {
 		if (!formatted || formatted === "error") {
 			await interaction.reply({
 				content: "Could not format message",
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 			return;
 		}

@@ -4,12 +4,15 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const { token } = process.env.DISCORD_TOKEN;
+const VoteManager = require("./app/voteManager.js");
+
+const voteManager = new VoteManager('votes.db');
 
 const client = new Client({
 	intents: [
-		GatewayIntentBits.Guilds,
 		GatewayIntentBits.DirectMessages,
 		GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
 	],
@@ -32,15 +35,25 @@ const eventFiles = fs
 	.readdirSync(eventsPath)
 	.filter((file) => file.endsWith(".js"));
 
+const dependencies = { client, voteManager };
+
 for (const file of eventFiles) {
 	const filePath = path.join(eventsPath, file);
 	const event = require(filePath);
 
 	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
+		client.once(event.name, (...args) => event.execute(...args, dependencies));
 	} else {
-		client.on(event.name, (...args) => event.execute(...args));
+		client.on(event.name, (...args) => event.execute(...args, dependencies));
 	}
 }
 
 client.login(token);
+
+process.on('SIGINT', () => {
+  console.log('Shutting down...');
+  voteManager.close();
+  client.destroy();
+  console.log('Shutdown complete.');
+  process.exit(0);
+});

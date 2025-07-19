@@ -8,7 +8,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('dev-builds')
 		.setDescription('The latest stockfish dev builds'),
-	async execute(interaction) {
+	async execute(interaction, dependencies) {
 		const repository = 'official-stockfish/Stockfish';
 		const headers = {
 			'Authorization': `Bearer ${token}`,

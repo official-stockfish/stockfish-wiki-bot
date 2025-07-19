@@ -3,7 +3,7 @@ const { chessify } = require("../app/chessify");
 
 module.exports = {
 	name: Events.MessageCreate,
-	async execute(message) {
+	async execute(message, dependencies) {
 		const formatted = await chessify(message);
 
 		if (formatted) {
