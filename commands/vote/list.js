@@ -27,11 +27,11 @@ module.exports = {
 
     const description = votedForUsers
       .map((user, index) => `${index + 1}. ${user}`)
-      .join('\n');
+      .join("\n");
 
     const embed = new EmbedBuilder()
-      .setColor('#0099ff')
-      .setTitle('Your Voted Users')
+      .setColor("#0099ff")
+      .setTitle("Your Voted Users")
       .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
       .setDescription(description)
       .setTimestamp()
