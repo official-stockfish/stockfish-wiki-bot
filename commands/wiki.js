@@ -82,7 +82,7 @@ for (const [key, value] of Object.entries(subcommands)) {
 // Export the slash command data and execute function
 module.exports = {
 	data: commandData,
-	async execute(interaction) {
+	async execute(interaction, dependencies) {
 		const requestedQuery = interaction.options.getString('query');
 		const requestedSub = subcommands[interaction.options.getSubcommand()];
 

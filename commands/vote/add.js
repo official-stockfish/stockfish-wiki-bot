@@ -11,7 +11,9 @@ module.exports = {
         .setDescription("The user to vote for")
         .setRequired(true)
     ),
-  async execute(interaction) {
+  async execute(interaction, dependencies) {
+    const { voteManager } = dependencies;
+
     const voter = interaction.user;
     const target = interaction.options.getUser("target");
 

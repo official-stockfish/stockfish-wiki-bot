@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { MessageFlags, SlashCommandBuilder } = require("discord.js");
 
 const fs = require("node:fs");
 const path = require("node:path");
@@ -17,12 +17,12 @@ for (const file of subcommandFiles) {
 
 module.exports = {
 	data: data,
-	async execute(interaction) {
+	async execute(interaction, dependencies) {
     const subcommandName = interaction.options.getSubcommand();
     const subcommand = require(path.join(subcommandsPath, `${subcommandName}.js`));
 
     try {
-      await subcommand.execute(interaction);
+      await subcommand.execute(interaction, dependencies);
     } catch (error) {
       console.error(error);
       await interaction.reply({

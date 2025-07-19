@@ -7,7 +7,7 @@ module.exports = {
 		.addStringOption((option) =>
 			option.setName("fen").setDescription("Board FEN").setRequired(true)
 		),
-	async execute(interaction) {
+	async execute(interaction, dependencies) {
 		const fen = interaction.options.getString("fen");
 
 		const stm = fen.split(" ")[1] === "w" ? "white" : "black";

@@ -12,7 +12,7 @@ const data = new ContextMenuCommandBuilder()
 
 module.exports = {
 	data: data,
-	async execute(interaction) {
+	async execute(interaction, dependencies) {
 		const content = await interaction.channel.messages.fetch(
 			interaction.targetId
 		);

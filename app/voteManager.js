@@ -18,8 +18,8 @@ class VoteManager {
   _initDatabase() {
     const createTableSql = `
       CREATE TABLE IF NOT EXISTS votes (
-        voter_id   INTEGER NOT NULL,
-        target_id  INTEGER NOT NULL,
+        voter_id   TEXT NOT NULL,
+        target_id  TEXT NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
         -- A user can only vote for another user once.
@@ -129,6 +129,4 @@ class VoteManager {
   }
 }
 
-const instance = new VoteManager('votes.db');
-
-module.exports = instance;
+module.exports = VoteManager;
