@@ -1,6 +1,7 @@
 const {
-	ContextMenuCommandBuilder,
 	ApplicationCommandType,
+	ContextMenuCommandBuilder,
+  MessageFlags,
 } = require("discord.js");
 
 const { chessify } = require("../app/chessify");

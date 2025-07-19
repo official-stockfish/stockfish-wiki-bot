@@ -3,12 +3,12 @@ const voteManager = require("../../app/voteManager.js");
 
 module.exports = {
   data: new SlashCommandSubcommandBuilder()
-    .setName("add")
-    .setDescription("Vote a member as helpful")
+    .setName("remove")
+    .setDescription("Remove a vote from a member")
     .addUserOption(option =>
       option
         .setName("target")
-        .setDescription("The user to vote for")
+        .setDescription("The user to remove vote from")
         .setRequired(true)
     ),
   async execute(interaction) {
@@ -26,18 +26,18 @@ module.exports = {
       return;
     }
 
-    const success = voteManager.addVote(voterId, targetId);
+    const success = voteManager.removeVote(voterId, targetId);
 
     if (!success) {
       await interaction.reply({
-        content: "You have already voted for this user!",
+        content: "You had not voted for this user!",
         flags: MessageFlags.Ephemeral
       });
       return;
     }
 
     await interaction.reply({
-      content:`Voted ${target.username}`,
+      content:`Removed vote from ${target.username}`,
       flags: MessageFlags.Ephemeral
     });
   },
