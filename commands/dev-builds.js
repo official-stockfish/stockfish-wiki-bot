@@ -37,9 +37,9 @@ module.exports = {
 				},
 				title: `**Latest ${preRelease ? 'pre-' : ''}release**: ${name}`,
 				url: link,
-				description: '',
 				color: parseInt('518047', 16),
 				timestamp: publishedAt,
+				fields: []
 			};
 			const assetsByOS = {
 				'ARM': [],
@@ -66,17 +66,52 @@ module.exports = {
 				}
 				for (const os in assetsByOS) {
 					if (assetsByOS[os].length > 0) {
-						embed.description += `**${os}**\n`;
 						assetsByOS[os].sort((a, b) => {
 							const orderA = customOrder.findIndex(item => a.name.toLowerCase().includes(item));
 							const orderB = customOrder.findIndex(item => b.name.toLowerCase().includes(item));
 							return orderA - orderB;
 						});
-						const assets = assetsByOS[os].map(asset => `[${asset.name}](${asset.browser_download_url})`).join(' | ');
-						embed.description += assets + '\n\n';
+
+						const assetLinks = assetsByOS[os].map(asset => `[${asset.name}](${asset.browser_download_url})`);
+
+						// Split into chunks that fit in 1024 chars
+						let currentChunk = [];
+						let currentLength = 0;
+						let partNumber = 1;
+
+						for (const link of assetLinks) {
+							const linkLength = link.length + 3; // +3 for " | "
+
+							if (currentLength + linkLength > 1020) { // Leave some buffer
+								// Add current chunk as field
+								embed.fields.push({
+									name: partNumber === 1 ? `**${os}**` : `**${os} (${partNumber})**`,
+									value: currentChunk.join(' | '),
+									inline: false
+								});
+
+								// Start new chunk
+								currentChunk = [link];
+								currentLength = linkLength;
+								partNumber++;
+							} else {
+								currentChunk.push(link);
+								currentLength += linkLength;
+							}
+						}
+
+						// Add remaining chunk
+						if (currentChunk.length > 0) {
+							embed.fields.push({
+								name: partNumber === 1 ? `**${os}**` : ``,
+								value: currentChunk.join(' | '),
+								inline: false
+							});
+						}
 					}
 				}
 			}
+
 			await interaction.reply({ embeds: [embed] });
 		}
 		catch (error) {
