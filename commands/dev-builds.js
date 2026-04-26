@@ -17,7 +17,7 @@ module.exports = {
 		try {
 			const customOrder = [
 				'apple-silicon', 'armv8-dotprod', 'armv8', 'armv7-neon',
-				'armv7', 'x86-64-vnni512', 'x86-64-vnni256', 'x86-64-avx512',
+				'armv7', 'x86-64-universal', 'x86-64-vnni512', 'x86-64-vnni256', 'x86-64-avx512',
 				'x86-64-avxvnni', 'x86-64-bmi2', 'x86-64-avx2',
 				'x86-64-sse41-popcnt', 'x86-64-ssse3', 'x86-64-sse3-popcnt',
 				'x86-64', 'x86-32-sse41-popcnt', 'x86-32-sse2', 'x86-32',
@@ -57,7 +57,7 @@ module.exports = {
 					else if (assetName.includes('macos')) {
 						assetsByOS['macOS'].push({ ...asset, name: formattedAssetName });
 					}
-					else if (assetName.includes('ubuntu')) {
+					else if (assetName.includes('linux') || assetName.includes('ubuntu')) {
 						assetsByOS['Linux'].push({ ...asset, name: formattedAssetName });
 					}
 					else if (assetName.includes('windows')) {
