@@ -42,17 +42,18 @@ module.exports = {
 				fields: []
 			};
 			const assetsByOS = {
-				'ARM': [],
+				'Android': [],
 				'macOS': [],
 				'Linux': [],
 				'Windows': [],
+				'Windows ARM': [],
 			};
 			if (latestRelease.assets.length > 0) {
 				for (const asset of latestRelease.assets) {
 					const assetName = asset.name.toLowerCase();
 					const formattedAssetName = assetName.split('-').slice(2).join('-').split('.')[0];
 					if (assetName.includes('android')) {
-						assetsByOS['ARM'].push({ ...asset, name: formattedAssetName });
+						assetsByOS['Android'].push({ ...asset, name: formattedAssetName });
 					}
 					else if (assetName.includes('macos')) {
 						assetsByOS['macOS'].push({ ...asset, name: formattedAssetName });
@@ -61,7 +62,11 @@ module.exports = {
 						assetsByOS['Linux'].push({ ...asset, name: formattedAssetName });
 					}
 					else if (assetName.includes('windows')) {
-						assetsByOS['Windows'].push({ ...asset, name: formattedAssetName });
+						if (assetName.includes('arm')) {
+							assetsByOS['Windows ARM'].push({ ...asset, name: formattedAssetName });
+						} else {
+							assetsByOS['Windows'].push({ ...asset, name: formattedAssetName });
+						}
 					}
 				}
 				for (const os in assetsByOS) {
