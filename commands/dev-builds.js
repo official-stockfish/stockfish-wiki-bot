@@ -46,7 +46,6 @@ module.exports = {
 				'macOS': [],
 				'Linux': [],
 				'Windows': [],
-				'Windows ARM': [],
 			};
 			if (latestRelease.assets.length > 0) {
 				for (const asset of latestRelease.assets) {
@@ -62,11 +61,7 @@ module.exports = {
 						assetsByOS['Linux'].push({ ...asset, name: formattedAssetName });
 					}
 					else if (assetName.includes('windows')) {
-						if (assetName.includes('arm')) {
-							assetsByOS['Windows ARM'].push({ ...asset, name: formattedAssetName });
-						} else {
-							assetsByOS['Windows'].push({ ...asset, name: formattedAssetName });
-						}
+						assetsByOS['Windows'].push({ ...asset, name: formattedAssetName });
 					}
 				}
 				for (const os in assetsByOS) {
