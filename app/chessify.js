@@ -60,13 +60,17 @@ async function chessify(message, isAppsCommand = false) {
 			matchFEN[0]
 		)}`;
 
+		const cdbUrl = `https://www.chessdb.cn/queryc_en/?${encodeURI(
+			matchFEN[0]
+		)}`;
+
 		const stm = matchFEN[0].split(" ")[1] === "w" ? "white" : "black";
 
 		const imageUrl = `https://lichess1.org/export/fen.gif?fen=${encodeURI(
 			matchFEN[0]
 		)}&color=${stm}`;
 
-		return `[Lichess Link](<${analysisUrl}>) | [Image](${imageUrl})`;
+		return `[Lichess](<${analysisUrl}>) | [Chessdb](<${cdbUrl}>) | [Image](${imageUrl})`;
 	}
 
 	const matchPGN = content.match(PGN_PATTERN);
