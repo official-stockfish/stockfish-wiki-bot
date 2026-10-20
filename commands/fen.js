@@ -16,12 +16,16 @@ module.exports = {
 			fen
 		)}`;
 
+		const cdbUrl = `https://www.chessdb.cn/queryc_en/?${encodeURI(
+			fen
+		)}`;
+
 		const imageUrl = `https://lichess1.org/export/fen.gif?fen=${encodeURI(
 			fen
 		)}&color=${stm}`;
 
 		await interaction.reply(
-			`\`\`\`${fen}\`\`\`[Lichess Link](<${analysisUrl}>) | [Image](${imageUrl})`
+			`\`\`\`${fen}\`\`\`[Lichess](<${analysisUrl}>) | [Chessdb](<${cdbUrl}>) | [Image](${imageUrl})`
 		);
 	},
 };
