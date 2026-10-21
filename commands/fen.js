@@ -24,6 +24,12 @@ module.exports = {
 			fen
 		)}&color=${stm}`;
 
+		const queueUrl = `https://www.chessdb.cn/cdb.php?action=queue&board=${encodeURI(
+			fen
+		)}`;
+
+		fetch(queueUrl).catch(() => {});
+
 		await interaction.reply(
 			`\`\`\`${fen}\`\`\`[Lichess](<${analysisUrl}>) | [Chessdb](<${cdbUrl}>) | [Image](${imageUrl})`
 		);

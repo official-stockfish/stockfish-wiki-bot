@@ -70,6 +70,12 @@ async function chessify(message, isAppsCommand = false) {
 			matchFEN[0]
 		)}&color=${stm}`;
 
+		const queueUrl = `https://www.chessdb.cn/cdb.php?action=queue&board=${encodeURI(
+			matchFEN[0]
+		)}`;
+
+		fetch(queueUrl).catch(() => {});
+
 		return `[Lichess](<${analysisUrl}>) | [Chessdb](<${cdbUrl}>) | [Image](${imageUrl})`;
 	}
 
