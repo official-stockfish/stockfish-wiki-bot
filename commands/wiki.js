@@ -14,6 +14,11 @@ const slugify = (inputString) => {
 	return inputString.replace(/[^\w\s_/\-.+]/g, '').replace(/[\s_/\-.+]+/g, '-').replace(/-+$/, '').toLowerCase();
 };
 
+const subcommandName = (inputString) => {
+	const slug = slugify(inputString);
+	return slug.length > 32 ? slug.slice(0, 32).replace(/-[^-]*$/, '') : slug;
+};
+
 const simplifyPageName = (name) => {
 	return name.replace(/\s+/g, '-');
 };
@@ -29,26 +34,24 @@ files.forEach((file) => {
 		const markdownContent = fs.readFileSync(filePath, 'utf-8');
 		const tokens = marked.lexer(markdownContent);
 
-		subcommands[slugify(fileName)] = {
+		const key = subcommandName(fileName);
+
+		subcommands[key] = {
 			file: fileName,
 			queries: [],
 		};
 
 		tokens.forEach(token => {
 			if (token.type === 'heading' && token.depth === 2) {
-				subcommands[slugify(fileName)].queries.push([token.text, []]);
+				subcommands[key].queries.push([token.text, []]);
 			}
 			else if (token.type === 'heading' && token.depth === 3) {
-				const previoush1 = subcommands[slugify(fileName)].queries[subcommands[slugify(fileName)].queries.length - 1];
+				const previoush1 = subcommands[key].queries[subcommands[key].queries.length - 1];
 				if (previoush1) {
 					previoush1[1].push(token.text);
 				}
 			}
 		});
-
-		if (subcommands.length > 25) {
-			subcommands.length = 25;
-		}
 	}
 });
 
@@ -58,7 +61,7 @@ const commandData = new SlashCommandBuilder()
 	.setDescription('Retrieve wiki articles');
 
 // loop over keys
-for (const [key, value] of Object.entries(subcommands)) {
+for (const [key, value] of Object.entries(subcommands).slice(0, 25)) {
 	const choices = value.queries.map(query => ({ name: query[0], value: query[0] }));
 	commandData.addSubcommand((subcommand) => {
 		const option = subcommand
