@@ -3,6 +3,20 @@ const PGN_PATTERN =
 const FEN_PATTERN =
 	/[rnbqkpRNBQKP1-8\/]+ [wb-]+ (K?Q?k?q?|-) ([a-h][1-8]|-)( \d+ \d+)?/gm;
 
+function formatFEN(fen) {
+	const encodedFen = encodeURI(fen);
+
+	const analysisUrl = `https://lichess.org/analysis/standard/${encodedFen}`;
+
+	const cdbUrl = `https://chessdb-explorer.static.hf.space/#fen=${encodedFen}`;
+
+	const stm = fen.split(" ")[1] === "w" ? "white" : "black";
+
+	const imageUrl = `https://lichess.org/export/fen.gif?fen=${encodedFen}&color=${stm}`;
+
+	return `[Lichess](<${analysisUrl}>) | [ChessDB](<${cdbUrl}>) | [Image](${imageUrl})`;
+}
+
 function formatPGN(pgn) {
 	const newLines = [];
 
@@ -56,21 +70,7 @@ async function chessify(message, isAppsCommand = false) {
 	const matchFEN = content.match(FEN_PATTERN);
 
 	if (matchFEN) {
-		const analysisUrl = `https://lichess.org/analysis/standard/${encodeURI(
-			matchFEN[0]
-		)}`;
-
-		const cdbUrl = `https://www.chessdb.cn/queryc_en/?${encodeURI(
-			matchFEN[0]
-		)}`;
-
-		const stm = matchFEN[0].split(" ")[1] === "w" ? "white" : "black";
-
-		const imageUrl = `https://lichess1.org/export/fen.gif?fen=${encodeURI(
-			matchFEN[0]
-		)}&color=${stm}`;
-
-		return `[Lichess](<${analysisUrl}>) | [Chessdb](<${cdbUrl}>) | [Image](${imageUrl})`;
+		return formatFEN(matchFEN[0]);
 	}
 
 	const matchPGN = content.match(PGN_PATTERN);
@@ -87,4 +87,5 @@ async function chessify(message, isAppsCommand = false) {
 
 module.exports = {
 	chessify,
+	formatFEN,
 };
