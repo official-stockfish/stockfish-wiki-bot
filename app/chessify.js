@@ -12,7 +12,7 @@ function formatFEN(fen) {
 
 	const stm = fen.split(" ")[1] === "w" ? "white" : "black";
 
-	const imageUrl = `https://lichess.org/export/fen.gif?fen=${encodedFen}&color=${stm}`;
+	const imageUrl = `https://lichess1.org/export/fen.gif?fen=${encodedFen}&color=${stm}`;
 
 	return `[Lichess](<${analysisUrl}>) | [ChessDB](<${cdbUrl}>) | [Image](${imageUrl})`;
 }
